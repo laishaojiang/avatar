@@ -1,0 +1,12 @@
+<view class="con-mask" hidden="{{!outer}}" style="z-index:{{layer}}">
+  <view class="con-inner{{inner ? ' show' : ''}}">
+    <view class="con-title">{{title}}</view>
+    <view class="con-body" style="{{contentStyle}}">
+      <slot></slot>
+    </view>
+    <view class="con-foot">
+      <button style="{{cancelStyle}}" bindtap="cancel" wx:if="{{haveCancel}}">{{cancelText}}</button>
+      <button style="{{confirmStyle}}"open-type="{{btnType||''}}" bindtap="confirm" data-metas="{{confirmMetas}}" bindopensetting="opensetting">{{confirmText}}</button>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,56 @@
+.con-mask {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background: rgba(0,0,0,.6);
+  z-index: 6;
+}
+.con-inner {
+  width: 660rpx;
+  margin: 300rpx auto 0;
+  padding: 30rpx;
+  box-sizing: border-box;
+  background: #FFF;
+  border-radius: 8rpx;
+  transition: .2s all;
+  transform: scale(0);
+}
+.con-inner.show {
+  transform: scale(1);
+}
+.con-title {
+  padding-bottom: 30rpx;
+  font-size: 40rpx;
+  text-align: center;
+}
+.con-body {
+  padding: 30rpx;
+  text-align: center;
+  font-size: 32rpx;
+}
+.con-foot {
+  display: flex;
+  justify-content: center;
+  margin-top: 30rpx;
+}
+.con-foot button {
+  width: 290rpx;
+  height: 92rpx;
+  line-height: 92rpx;
+  font-size: 34rpx;
+  margin: 0;
+  padding: 0
+}
+.con-foot button:first-child {
+  color: #ff7f02;
+  border: 2rpx solid rgba(255,127,2,1);
+  background: transparent;
+}
+.con-foot button:last-child {
+  background: #ff7f02;
+  border: 2rpx solid #ff7f02;
+  color: #fff;
+  margin-left: 20rpx;
+}
