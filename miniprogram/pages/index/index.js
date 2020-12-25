@@ -24,13 +24,14 @@ Page({
     marginTop: 0,
     imgHeight: 100,
     imgWidth: 100,
-    tabs: [{
-        name: '耳机',
-        orderStatus: 0
+    tabs: [
+      {
+        name: '圣诞帽',
+        orderStatus: 1
       },
       {
-        name: '帽子',
-        orderStatus: 1
+        name: '耳机',
+        orderStatus: 0
       },
       {
         name: '国旗',
@@ -139,9 +140,14 @@ Page({
           })
         } else {
           this.setData({
-            avatarUrl: '/images/logo.png'
+            avatarUrl: '/images/logo.jpg'
           })
         }
+      },
+      fail: () => {
+        this.setData({
+          avatarUrl: '/images/logo.jpg'
+        })
       }
     })
   },
@@ -157,7 +163,7 @@ Page({
   selectImg(e) {
     const { img, index } = e.currentTarget.dataset
     this.setData({
-      chooseImage: img,
+      // chooseImage: img,
       [`curSelect${this.data.curIndex}`]: index
     })
     this.setDropItem({
@@ -169,18 +175,15 @@ Page({
 
   onGetUserInfo: async function(e) {
     console.log(e)
-    if (!this.data.logged && e.detail.userInfo) {
-      const avatarUrl = await this.getImageInfo(e.detail.userInfo.avatarUrl)
-      this.setData({
-        logged: true,
-        avatarUrl,
-        userInfo: e.detail.userInfo
-      })
-    }
+    const avatarUrl = await this.getImageInfo(e.detail.userInfo.avatarUrl)
+    this.setData({
+      // logged: true,
+      avatarUrl,
+      userInfo: e.detail.userInfo
+    })
   },
 
   async saveImage() {
-    const res = await this.drawImg()
     wx.saveImageToPhotosAlbum({
       filePath: res,
       success: function() {
@@ -229,7 +232,6 @@ Page({
             wx.showLoading({
               title: '图片安全检测中',
             })
-            debugger
             const result = await wx.cloud.callFunction({
               name: 'imgCheck',
               data: {
@@ -237,6 +239,7 @@ Page({
               }
             })
             console.log(result)
+            wx.hideLoading()
             if(result.result.errorCode == '87014') {
               wx.showToast({
                 icon: 'none',
@@ -256,7 +259,7 @@ Page({
             })
           },
           complete: () => {
-            wx.hideLoading()
+            
           }
         })
       },
@@ -502,6 +505,7 @@ Page({
     //   });
     // })
     maskCanvas.drawImage(this.data.avatarUrl, 0,0,250, 250)
+    maskCanvas.draw()
     //画背景 hCw 为 1.62 背景图的高宽比
     // maskCanvas.drawImage('/images/bg.png', 0, 0, this.data.canvasWidth, this.data.canvasHeight);
     /*
@@ -522,7 +526,7 @@ Page({
       maskCanvas.restore();
     })
     setTimeout(() => {
-      maskCanvas.draw(false, (e) => {
+      maskCanvas.draw(true, (e) => {
         wx.canvasToTempFilePath({
           canvasId: 'maskCanvas',
           x: 0,
@@ -579,5 +583,12 @@ Page({
         })
       }
     })
+  },
+
+  onShareAppMessage: function (res) {
+    return {
+      title: '快给你的头像加点好玩的东西吧',
+      path: '/pages/index/index'
+    }
   }
 })

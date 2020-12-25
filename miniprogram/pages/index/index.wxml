@@ -35,12 +35,13 @@
 		</view>
 		<view class="tab-container">
 			<view hidden="{{curIndex != 0}}" class="tab-c flex">
-				<view class="imgbox {{curSelect0 == index ? 'active' : '' }}" wx:for="{{imgbox0}}" bindtap="selectImg" data-img="{{item}}" data-index="{{index}}" wx:key="item">
+				<view class="imgbox {{curSelect0 == index ? 'active' : '' }}" wx:for="{{imgbox1}}" bindtap="selectImg" data-img="{{item}}" data-index="{{index}}" wx:key="item">
 					<image src="{{item}}" mode=""></image>
-				</view>
+        </view>
 			</view>
 			<view hidden="{{curIndex != 1}}" class="tab-c flex">
-				<view class="imgbox {{curSelect1 == index ? 'active' : '' }}" wx:for="{{imgbox1}}" bindtap="selectImg" data-img="{{item}}" data-index="{{index}}" wx:key="item">
+				
+        <view class="imgbox {{curSelect1 == index ? 'active' : '' }}" wx:for="{{imgbox0}}" bindtap="selectImg" data-img="{{item}}" data-index="{{index}}" wx:key="item">
 					<image src="{{item}}" mode=""></image>
 				</view>
 			</view>
